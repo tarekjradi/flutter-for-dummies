@@ -2,10 +2,12 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// Tells Flutter to run the app defined in MyApp.
 void main() {
   runApp(MyApp());
 }
 
+/// The code in MyApp sets up the whole app. It creates the app-wide state
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -25,8 +27,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// The starting point of your app.
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+
+  void getNext() {
+    current = WordPair.random();
+    notifyListeners();
+  }
 }
 
 class MyHomePage extends StatelessWidget {
@@ -37,8 +45,15 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Text('A random idea:'),
+          Text('A random AWESOME idea....:'), // ← Example change.
           Text(appState.current.asLowerCase),
+
+          ElevatedButton(
+            onPressed: () {
+              appState.getNext();
+            },
+            child: Text('Next'),
+          ),
         ],
       ),
     );
